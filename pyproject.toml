@@ -8,4 +8,19 @@ dependencies = [
     "matplotlib>=3.11.0",
     "numpy>=2.5.1",
     "pandas>=3.0.3",
+    "torch>=2.13.0",
 ]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-rocm", marker = "sys_platform == 'linux'" },
+    { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/rocm7.2"
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
