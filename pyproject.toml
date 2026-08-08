@@ -1,26 +1,27 @@
 [project]
-name = "nn-from-scratch"
+name = "MNIST"
 version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.14.0"
 dependencies = [
-    "matplotlib>=3.11.0",
-    "numpy>=2.5.1",
-    "pandas>=3.0.3",
-    "torch>=2.13.0",
+  "matplotlib>=3.11.1",
+  "pandas>=3.0.5",
+  "torch>=2.11.0",
+  "torchvision>=0.26.0",
+  "triton-rocm>=3.6.0 ; sys_platform == 'linux'",
 ]
 
 [tool.uv.sources]
 torch = [
-    { index = "pytorch-rocm", marker = "sys_platform == 'linux'" },
-    { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },
+  { index = "pytorch-rocm", marker = "sys_platform == 'linux'" },
+]
+torchvision = [
+  { index = "pytorch-rocm", marker = "sys_platform == 'linux'" },
+]
+triton-rocm = [
+  { index = "pytorch-rocm", marker = "sys_platform == 'linux'" },
 ]
 
 [[tool.uv.index]]
 name = "pytorch-rocm"
 url = "https://download.pytorch.org/whl/rocm7.2"
-
-[[tool.uv.index]]
-name = "pytorch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
+explicit = true
